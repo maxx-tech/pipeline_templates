@@ -147,4 +147,16 @@ stages:
           parameters:
             name: 'apktoolinstall2'
             apktool_version: $(VersionNumber)
-
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
+    vstsFeed: '082a5961-f2e0-4a8d-9902-0685a460a96c'
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: 
+- task: XamarinAndroid@1
+  inputs:
+    projectFile: '**/*.csproj'
+    jdkOption: 'JDKVersion'
